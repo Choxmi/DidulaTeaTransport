@@ -1,14 +1,17 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-let mysql = require('mysql');
+let sqlite = require('sqlite');
+const express = require('express');
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow() {
+async function createWindow() {
     // Create the browser window.
+    express();
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
@@ -20,8 +23,9 @@ function createWindow() {
     })
 
     // and load the index.html of the app.
-    mainWindow.loadFile('index.html')
-
+    mainWindow.loadFile('index.html');
+    // mainWindow.loadURL('http://localhost:3000/');
+    // mainWindow.webContents.print({silent: true});
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 
@@ -33,13 +37,12 @@ function createWindow() {
     // either '/' or 'C:\'.
     // console.log(root)
 
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: ""
-    });
-
-    console.log(con);
+    // var con = mysql.createConnection({
+    //     host: "localhost",
+    //     user: "root",
+    //     password: ""
+    // });
+    const db = await sqlite.open('./diduladb.sqlite');
 
     // con.connect(function(err) {
     //     if (err) throw err;

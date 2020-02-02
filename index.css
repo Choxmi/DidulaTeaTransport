@@ -37,15 +37,15 @@ body,
 }
 
 #p2 {
-    background: tomato;
+    background: rgb(0, 43, 117);
 }
 
 #p3 {
-    background: gold;
+    background: rgb(45, 0, 79);
 }
 
 #p4 {
-    background: deeppink;
+    background: rgb(72, 1, 31);
 }
 
 #p5 {
@@ -176,8 +176,8 @@ a {
     bottom: 0;
     right: 10%;
     left: 0;
-    width: 270px;
-    height: 170px;
+    width: 100%;
+    height: auto;
     margin: auto;
     text-align: center;
     font-size: 80px;
@@ -193,8 +193,16 @@ a {
 }
 
 .page#p1 .icon {
-    height: 220px;
+    height: auto;
 }
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
 
 .page#p1 .icon {
     transform: translateX(10%) !important;
@@ -212,7 +220,7 @@ a {
 }
 
 .logo {
-    width: 100%;
+    width: 50%;
 }
 
 section .thumb {
@@ -260,4 +268,99 @@ section .thumb {
 .btncard-container {
     display: inline-flex;
     width: 80%;
+}
+
+.overlay {
+    position: relative;
+}
+
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+    z-index: 9000;
+}
+
+.topright img {
+    width: 30px;
+    height: auto;
+}
+
+.overlay-container{
+    width: 100%;
+    height: auto;
+}
+
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+    font-size: 15px;
+  }
+  .autocomplete-items {
+    position: absolute;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #313131;
+    border-bottom: 1px solid #d4d4d4;
+  }
+  .autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+  }
+  .autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+  }
+
+.form-rounded {
+    border-radius: 1rem !important;
+    text-align: center;
+}
+
+.section-size {
+    width: 100%;
+    height: auto;
+}
+
+.section-container{
+    margin-right: 20%;
+}
+
+.descriptor{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.flex-content{
+    flex: 1;margin-left: 2px;margin-right: 2px;
+}
+
+table {
+    width: 100%;
+}
+
+table tr td {
+    font-size: 20px;
+    width: 25%;
+}
+
+.report-p {
+    font-size: 11px;
+}
+
+.print-div {
+    height: 2480px;
+    width: 1748px;
 }

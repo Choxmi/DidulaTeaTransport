@@ -2,268 +2,195 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" href="css/blueimp-gallery.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 
 <body>
     <div class="ct" id="t1">
+        <div class="topright"><img src="close.png"/></div>
         <div class="ct" id="t2">
             <div class="ct" id="t3">
                 <div class="ct" id="t4">
                     <div class="ct" id="t5">
                         <ul id="menu">
                             <a href="#t1">
-                                <li class="icon fa fa-bolt" id="uno">Home</li>
+                                <li class="icon" id="uno">Home</li>
                             </a>
                             <a href="#t2">
-                                <li class="icon fa fa-keyboard-o" id="dos">Lotto</li>
+                                <li class="icon" id="dos">Transactions</li>
                             </a>
                             <a href="#t3">
-                                <li class="icon fa fa-rocket" id="tres">ToolBox</li>
+                                <li class="icon" id="tres">Customers</li>
                             </a>
                             <a href="#t4">
-                                <li class="icon fa fa-dribbble" id="cuatro">CTI & THA</li>
+                                <li class="icon" id="cuatro">Payslips</li>
                             </a>
                             <a href="#t5">
-                                <li class="icon fa fa-plus-circle" id="cinco">Gallery</li>
+                                <li class="icon" id="cinco">Reports</li>
                             </a>
                         </ul>
                         <div class="page" id="p1">
-                            <section class="icon fa fa-bolt"><img class="logo" src="./logo.png" /></section>
+                            <section class="icon">
+                                <div class="section-container vertical-center">
+                                    <img class="logo" src="./logo.png" />
+                                </div>
+                            </section>
                         </div>
                         <div class="page" id="p2">
-                            <section class="icon fa fa-keyboard-o"><span class="title">Type</span></section>
+                            <section class="icon section-size">
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Date</p>
+                                        <input type="date" id="trdate" class="form-control form-rounded"/>
+                                      </div>
+                                    </div>
+                                <div class="section-container">
+                                <div class="autocomplete" style="width:auto;">
+                                    <p class="descriptor">ID</p>
+                                    <input id="userID" type="text" name="userid" class="form-control form-rounded" placeholder="ID">
+                                    </div>
+                                </div>
+                                <div class="section-container">
+                                <div class="autocomplete" style="width:auto;">
+                                    <p class="descriptor">Username</p>
+                                    <input id="userNameInput" type="text" name="username" class="form-control form-rounded" placeholder="Username">
+                                  </div>
+                                </div>
+                                <div class="section-container">
+                                <div class="autocomplete" style="width:auto;">
+                                    <p class="descriptor">Gross Weight</p>
+                                    <input id="grossWeight" type="text" name="grossweight" class="form-control form-rounded" placeholder="Gross Weight">
+                                </div>
+                                </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:100%;">
+                                    <p class="descriptor">Additional Expenses</p>
+                                    <div style="display: flex;">
+                                        <div class="flex-content"></div>
+                                        <div class="flex-content">
+                                            <select id="additionalTypes" class="form-control form-rounded">
+                                                <option value="0">අත්තිකාරම්</option>
+                                                <option value="1">පොහොර/25Kg</option>
+                                                <option value="2">වල් නාශක/Bottle</option>
+                                                <option value="3">ඩොලමයිට්/Pkt</option>
+                                                <option value="4">තේ කොළ/Pkt</option>
+                                                <option value="5">වෙනත්</option>
+                                            </select>
+                                        </div>
+                                        <div class="flex-content"><input id="additional1" type="text" name="additional1" class="form-control form-rounded" placeholder="Amount(Rs.)"></div>
+                                        <div class="flex-content"><input id="additional2" type="text" name="additional2" class="form-control form-rounded" placeholder="" disabled></div>
+                                        <div class="flex-content"><button class="btn btn-success" id="addAdditional"><i class="fas fa-plus-circle"></i></button></div>
+                                    </div>
+                                </div>
+                                </div>
+                                
+                            <div class="section-container">
+                                <div id="tableContainer">
+                                </div>
+                            </div>
+                            <div class="section-container">
+                                <div class="autocomplete" style="width:auto;">
+                                    <button class="btn btn-success" id="addAdditional"><i class="fas fa-check-circle">  submit</i></button>
+                                </div>
+                            </div>
+                            </section>
                         </div>
                         <div class="page" id="p3">
-                            <div class="btncard-container">
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>1</p>
+                            <section class="icon section-size">
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">NIC</p>
+                                        <input id="userNIC" type="text" name="nic" class="form-control form-rounded" placeholder="NIC">
+                                      </div>
                                     </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>2</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>3</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>4</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>5</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>6</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btncard-container">
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>7</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>8</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>9</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>10</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>11</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>12</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btncard-container">
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>13</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>14</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>15</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>16</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>17</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>18</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btncard-container">
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>19</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>20</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>21</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>22</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>23</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>24</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btncard-container">
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>25</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>26</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>27</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>28</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>29</p>
-                                    </div>
-                                </div>
-                                <div class="btncard 1">
-                                    <div class="card_image"> <img src="./logo.png"> </div>
-                                    <div class="card_title title-white">
-                                        <p>30</p>
-                                    </div>
-                                </div>
-                            </div>
+                                    <div class="section-container">
+                                        <div class="autocomplete" style="width:auto;">
+                                            <p class="descriptor">Name</p>
+                                            <input id="userNameField" type="text" name="name" class="form-control form-rounded" placeholder="Name">
+                                          </div>
+                                        </div>
+                                        <div class="section-container">
+                                            <div class="autocomplete" style="width:auto;">
+                                                <p class="descriptor">Mobile No.</p>
+                                                <input id="userMobile" type="text" name="mobile" class="form-control form-rounded" placeholder="Mobile No.">
+                                              </div>
+                                            </div>
+                                            <div class="section-container">
+                                                <div class="autocomplete" style="width:auto;">
+                                                    <p class="descriptor">Account No.</p>
+                                                    <input id="userAccount" type="text" name="username" class="form-control form-rounded" placeholder="Account No.">
+                                                  </div>
+                                                </div>
+                                                <div class="section-container">
+                                                    <div class="autocomplete" style="width:auto;">
+                                                        <p class="descriptor">Address</p>
+                                                        <input id="userAddress" type="text" name="username" class="form-control form-rounded" placeholder="Address">
+                                                      </div>
+                                                    </div>
+                                                    <div class="section-container"><button class="btn btn-success" id="addAdditional"><i class="fas fa-check-circle">  submit</i></button></div>
+                            </section>
                         </div>
                         <div class="page" id="p4">
-                            <section class="icon fa fa-dribbble">
-                                <span class="title">Dribbble</span>
-                                <p class="hint">
-                                    <a href="https://dribbble.com/albertohartzet" target="_blank">Im ready to play, <span class="hint line-trough">invite me </span> find me</a>
-                                </p>
-                                <p class="hint">Already invited by <a href="http://www.dribbble.com/mrpeters" target="_blank">Stan Peters</a></p>
+                            <section class="icon section-size">
+                                <div class="section-container" style="overflow: scroll;">
+                                    
+                                <button onclick="printDiv('printSample')">Print Me</button>
+                                    <div id="printSample" class="print-div">
+                                <div style="text-align: center;">
+                                    <h1>දිදුල අමු තේ දළු ප්‍රවාහනය කරන්නෝ</h1>
+                                    <h3>ඩී.ඩබ්. අලංක නිලුපුල්</h3>
+                                    <p class="report-p"><strong>(බලයලත් අමු තේ දළු වෙළඳ නියෝජිත)</strong></p>
+                                    <p class="report-p">B 73, පුංචි දොඩාවත්ත, නූරිය. දු.ක. 077 9055513</p>
+                                    <p class="report-p">ලි.ප. අංකය R 4867</p>
+                                    <p class="report-p"><u>1957 අංක 51 දරණ TC 18 දරණ ප්‍රකාශනය</u></p>
+                                    <hr>
+                                    <p class="report-p">පහත නම සඳහන් මා විසින් ... මාසයේ ඉහත නම සඳහන් අයට<br>අමු තේ දළු කි.ග්‍රෑ. ... ක් මාගේ ඉඩමෙන් නෙලාගෙන බාර දී රුපියල්<br> ... ශත ... ක මුදලක් / හිඟ බිල්පත බාර ගතිමි.</p>
+                                    <p class="report-p">නම                 : </p>
+                                    <p class="report-p">ලිපිනය               : </p>
+                                    <p class="report-p">සාමාජික අංකය        : </p>
+                                    <p class="report-p">සැපයූ තේ දළු ප්‍රමාණය  : </p>
+                                    <p class="report-p">කිලෝවක මිල         : </p>
+                                    <p class="report-p">මුළු මුදල              : </p>
+                                    <hr>
+                                    <div style="display: flex;">
+                                        <p class="report-p"><u>අඩු කිරීම්</u></p">
+                                        <div style="flex: 5;">
+                                            <p class="report-p">අත්තිකාරම් මුදල්              : </p>
+                                            <p class="report-p">ප්‍රවාහන ගාස්තු             : </p>
+                                            <p class="report-p">පොහොර              : </p>
+                                            <p class="report-p">ඩොලමයිට්              : </p>
+                                            <p class="report-p">කලින් මාසයේ හිඟ මුදල්              : </p>
+                                        </div>
+                                        <div style="flex: 5;">
+                                            <p class="report-p">තේ කොළ              : </p>
+                                            <p class="report-p">මුද්දර ගාස්තු              : </p>
+                                            <p class="report-p">වෙනත්              : </p>
+                                        </div>
+                                    </div>
+                                    <p class="report-p">මුළු අඩු කිරීම්              : </p>
+                                    <p class="report-p">ගෙවීමට ඇති ඉතිරි/හිඟ මුදල             : </p>
+                                    <p class="report-p">ඉහත සඳහන් මුදල ලබාගත් බව සහතික කරමි</p>
+                                    <div style="display: flex;">
+                                        <div style="flex: 5;">
+                                            <p class="report-p">..............</p>
+                                            <p class="report-p">දිනය</p>
+                                        </div>
+                                        <div style="flex: 5;">
+                                            <p class="report-p">.....................</p>
+                                            <p class="report-p">දළු සැපයුම්කරුගේ අත්සන</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                             </section>
                         </div>
                         <div class="page" id="p5">
                             <section class="icon fa fa-plus-circle">
-                                <span class="title">Gallery</span>
-                                <div id="blueimp-gallery" class="blueimp-gallery">
-                                    <div class="slides"></div>
-                                    <h3 class="title"></h3>
-                                    <a class="prev">‹</a>
-                                    <a class="next">›</a>
-                                    <a class="close">×</a>
-                                    <a class="play-pause"></a>
-                                    <ol class="indicator"></ol>
-                                </div>
-
-                                <div id="links">
-                                    <a href="gallery/aquaman1.jpg" title="Aquaman">
-                                        <img class="thumb" src="gallery/aquaman1.jpg" alt="Aquaman" />
-                                    </a>
-                                    <a href="gallery/ironman1.jpg" title="IronMan">
-                                        <img class="thumb" src="gallery/ironman1.jpg" alt="IronMan" />
-                                    </a>
-                                    <a href="gallery/godzilla1.jpg" title="Godzilla">
-                                        <img class="thumb" src="gallery/godzilla1.jpg" alt="Godzilla" />
-                                    </a>
-                                    <a href="gallery/godzilla2.jpg" title="Godzilla">
-                                        <img class="thumb" src="gallery/godzilla2.jpg" alt="Godzilla" />
-                                    </a>
-                                </div>
-
+                                
                             </section>
                         </div>
                     </div>
@@ -271,22 +198,26 @@
             </div>
         </div>
     </div>
-
+    
+    <script src="js/propper.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/blueimp-gallery.min.js"></script>
-
+    <script src="js/operations.js"></script>
     <script>
-        document.getElementById('links').onclick = function(event) {
-            event = event || window.event
-            var target = event.target || event.srcElement,
-                link = target.src ? target.parentNode : target,
-                options = {
-                    index: link,
-                    event: event,
-                    fullScreen: false
-                },
-                links = this.getElementsByTagName('a')
-            blueimp.Gallery(links, options)
-        }
+        // document.getElementById('links').onclick = function(event) {
+        //     event = event || window.event
+        //     var target = event.target || event.srcElement,
+        //         link = target.src ? target.parentNode : target,
+        //         options = {
+        //             index: link,
+        //             event: event,
+        //             fullScreen: false
+        //         },
+        //         links = this.getElementsByTagName('a')
+        //     blueimp.Gallery(links, options)
+        // }
     </script>
 
 </body>
