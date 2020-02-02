@@ -1,7 +1,10 @@
-var customers = ["Choxmi","Choxmi","Choxmi","Choxmi","Choxmi","Choxmi","Choxmi","Pasindu"];
+var customers = [];
+var nicList = [];
+var fullUserList = [];
 var additionals = [];
+var selectedUser = {};
 
-function autocomplete(inp, arr) {
+function autocomplete(inp, arr, ext, prop) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
@@ -28,11 +31,14 @@ function autocomplete(inp, arr) {
             b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
             /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "|"+i+"'>";
             /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
-                inp.value = this.getElementsByTagName("input")[0].value;
+                inp.value = ((this.getElementsByTagName("input")[0].value).split('|'))[0];
+                selectedUser = fullUserList[parseInt(((this.getElementsByTagName("input")[0].value).split('|'))[1])];
+                ext.value = selectedUser[prop];
+                // alert(JSON.stringify(this.getElementsByTagName("label")));
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
@@ -97,7 +103,8 @@ function autocomplete(inp, arr) {
       closeAllLists(e.target);
   });
 }
-autocomplete(document.getElementById("userNameInput"), customers);
+autocomplete(document.getElementById("userNameInput"), customers, document.getElementById("userID"),"nic");
+autocomplete(document.getElementById("userID"), nicList, document.getElementById("userNameInput"),"name");
 // autocomplete(document.getElementById("userSearch"), customers);
 
 function removeAdditional(pos){
@@ -152,7 +159,25 @@ function generateAdditional(){
   $('#tableContainer').append(content);
 }
 
+function fetchUserData(){
+  $.get( "/listUsers")
+  .done(function( data ) {
+      console.log(data);
+      fullUserList = data;
+      for(var i = 0; i < data.length; i++){
+        customers.push(data[i].name);
+        nicList.push(data[i].nic);
+      }
+  })
+  .fail(function( data ) {
+      alert(data.responseText);
+  });
+}
+
 $( document ).ready(function() {
+
+  fetchUserData();
+
   $('#trdate').val(moment().format('YYYY-MM-DD'));
 
   $( "#additionalTypes" ).change(function() {
@@ -195,9 +220,40 @@ $( document ).ready(function() {
     }
   });
 
+  $('#closeButton').click(function(){
+    if (confirm("Do you want to close the application?")) {
+      window.close();
+    } else {
+      
+    }
+  });
+
   $('#addAdditional').click(function(){
-    additionals.push({index: $( "#additionalTypes" ).val(), col1: $( "#additionalTypes option:selected" ).html(), col2: $('#additional1').val(), col3: $('#additional2').val()});
-    generateAdditional();
+    var exist = false;
+    for(var i = 0; i < additionals.length; i++){
+      if(additionals[i].index === $( "#additionalTypes" ).val()){
+        exist = true;
+      }
+    }
+
+    if(!exist){
+      additionals.push({index: $( "#additionalTypes" ).val(), col1: $( "#additionalTypes option:selected" ).html(), col2: $('#additional1').val(), col3: $('#additional2').val()});
+      generateAdditional();
+    } else {
+      alert("Record Exist");
+    }
+  });
+
+  $('#createUser').click(function(){
+    
+    $.get( "/addUser",{nic: $('#userNIC').val(),name: $('#userNameField').val(),mobile: $('#userMobile').val(),account: $('#userAccount').val(),address: $('#userAddress').val()})
+    .done(function( data ) {
+        alert("Success");
+    })
+    .fail(function( data ) {
+        alert(data.responseText);
+    });
+    
   });
 
 });
