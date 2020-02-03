@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "handlebars": "^4.7.2",
     "hbs": "^4.1.0",
+    "jspdf": "^1.5.3",
     "nodemon": "^2.0.2",
     "screenfull": "^5.0.0",
     "sqlite": "^3.0.3",

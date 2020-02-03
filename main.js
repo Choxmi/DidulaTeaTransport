@@ -10,8 +10,8 @@ let mainWindow
 async function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 420,
+        height: 595,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         },

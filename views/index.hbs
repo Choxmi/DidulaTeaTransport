@@ -93,7 +93,7 @@
                             </div>
                             <div class="section-container">
                                 <div class="autocomplete" style="width:auto;">
-                                    <button class="btn btn-success" id="addAdditional"><i class="fas fa-check-circle">  submit</i></button>
+                                    <button class="btn btn-success" id="addTransaction"><i class="fas fa-check-circle">  submit</i></button>
                                 </div>
                             </div>
                             </section>
@@ -135,57 +135,72 @@
                         </div>
                         <div class="page" id="p4">
                             <section class="icon section-size">
-                                <div class="section-container" style="overflow: scroll;">
-                                    
-                                <button onclick="printDiv('printSample')">Print Me</button>
-                                    <div id="printSample" class="print-div">
-                                <div style="text-align: center;">
-                                    <h1>දිදුල අමු තේ දළු ප්‍රවාහනය කරන්නෝ</h1>
-                                    <h3>ඩී.ඩබ්. අලංක නිලුපුල්</h3>
-                                    <p class="report-p"><strong>(බලයලත් අමු තේ දළු වෙළඳ නියෝජිත)</strong></p>
-                                    <p class="report-p">B 73, පුංචි දොඩාවත්ත, නූරිය. දු.ක. 077 9055513</p>
-                                    <p class="report-p">ලි.ප. අංකය R 4867</p>
-                                    <p class="report-p"><u>1957 අංක 51 දරණ TC 18 දරණ ප්‍රකාශනය</u></p>
-                                    <hr>
-                                    <p class="report-p">පහත නම සඳහන් මා විසින් ... මාසයේ ඉහත නම සඳහන් අයට<br>අමු තේ දළු කි.ග්‍රෑ. ... ක් මාගේ ඉඩමෙන් නෙලාගෙන බාර දී රුපියල්<br> ... ශත ... ක මුදලක් / හිඟ බිල්පත බාර ගතිමි.</p>
-                                    <p class="report-p">නම                 : </p>
-                                    <p class="report-p">ලිපිනය               : </p>
-                                    <p class="report-p">සාමාජික අංකය        : </p>
-                                    <p class="report-p">සැපයූ තේ දළු ප්‍රමාණය  : </p>
-                                    <p class="report-p">කිලෝවක මිල         : </p>
-                                    <p class="report-p">මුළු මුදල              : </p>
-                                    <hr>
-                                    <div style="display: flex;">
-                                        <p class="report-p"><u>අඩු කිරීම්</u></p">
-                                        <div style="flex: 5;">
-                                            <p class="report-p">අත්තිකාරම් මුදල්              : </p>
-                                            <p class="report-p">ප්‍රවාහන ගාස්තු             : </p>
-                                            <p class="report-p">පොහොර              : </p>
-                                            <p class="report-p">ඩොලමයිට්              : </p>
-                                            <p class="report-p">කලින් මාසයේ හිඟ මුදල්              : </p>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;display:flex;">
+                                        <div  class="flex-content"></div>
+                                        <div  class="flex-content">
+                                            <p class="descriptor">Year</p>
+                                            <select id="rep_year" class="form-control form-rounded">
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2026">2026</option>
+                                                <option value="2027">2027</option>
+                                                <option value="2028">2028</option>
+                                                <option value="2029">2029</option>
+                                                <option value="2030">2030</option>
+                                            </select>
                                         </div>
-                                        <div style="flex: 5;">
-                                            <p class="report-p">තේ කොළ              : </p>
-                                            <p class="report-p">මුද්දර ගාස්තු              : </p>
-                                            <p class="report-p">වෙනත්              : </p>
+                                        <div  class="flex-content">
+                                            <p class="descriptor">Month</p>
+                                            <select id="rep_month" class="form-control form-rounded">
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                    <p class="report-p">මුළු අඩු කිරීම්              : </p>
-                                    <p class="report-p">ගෙවීමට ඇති ඉතිරි/හිඟ මුදල             : </p>
-                                    <p class="report-p">ඉහත සඳහන් මුදල ලබාගත් බව සහතික කරමි</p>
-                                    <div style="display: flex;">
-                                        <div style="flex: 5;">
-                                            <p class="report-p">..............</p>
-                                            <p class="report-p">දිනය</p>
-                                        </div>
-                                        <div style="flex: 5;">
-                                            <p class="report-p">.....................</p>
-                                            <p class="report-p">දළු සැපයුම්කරුගේ අත්සන</p>
-                                        </div>
+                                        <div  class="flex-content"></div>
                                     </div>
                                 </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;display:flex">
+                                        <div  class="flex-content"></div>
+                                        <div  class="flex-content">
+                                        <p class="descriptor">කිලෝවක මිල</p>
+                                        <input id="repPrice" type="text" name="name" class="form-control form-rounded" placeholder="කිලෝවක මිල"></div>
+                                        <div  class="flex-content">
+                                        <p class="descriptor">මුද්දර ගාස්තු</p>
+                                        <input id="repStamp" type="text" name="name" class="form-control form-rounded" placeholder="මුද්දර ගාස්තු"></div>
+                                        <div  class="flex-content">
+                                        <p class="descriptor">ප්‍රවාහන ගාස්තු</p>
+                                        <input id="repTransport" type="text" name="name" class="form-control form-rounded" placeholder="ප්‍රවාහන ගාස්තු"></div>
+                                        <div  class="flex-content"><button class="btn btn-success" id="repRateSave"><i class="fas fa-check-circle">  Save</i></button></div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">NIC</p>
+                                        <input id="repNIC" type="text" name="nic" class="form-control form-rounded" placeholder="NIC">
+                                        </div>
+                                    </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Name</p>
+                                        <input id="repName" type="text" name="name" class="form-control form-rounded" placeholder="Name">
+                                    </div>
+                                </div>
                             </section>
                         </div>
                         <div class="page" id="p5">
@@ -202,6 +217,7 @@
     <script src="js/propper.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/jspdf.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/blueimp-gallery.min.js"></script>
     <script src="js/operations.js"></script>

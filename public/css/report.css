@@ -1,0 +1,29 @@
+.report-p {
+    font-size: 11px;
+    margin: 0 !important;
+}
+
+.print-div {
+    height: 595px;
+    width: 420px;
+}
+
+.print-div h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.print-div h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.print-div p {
+    margin: 0;
+    padding: 0;
+}
+
+.basics {
+    text-align: left;
+    margin-left: 5%;
+}

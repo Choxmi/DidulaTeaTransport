@@ -123,16 +123,36 @@ function createBrowserWindow() {
 }
 
 function printDiv(divName) {
-  var printContents = document.getElementById(divName).innerHTML;
-  var originalContents = document.documentElement.innerHTML;
+  // var printContents = document.getElementById(divName).innerHTML;
+  // var originalContents = document.documentElement.innerHTML;
 
-  window.document.write(printContents);
+  // window.document.write(printContents);
 
-  window.print();
+  // window.print();
 
-  document.location.reload();
-
+  // document.location.reload();
   
+  console.log("PLEASE PRINT");
+
+$.get( "/generatePDF" )
+  .done(function( data ) {
+      alert("Success");
+  })
+  .fail(function( data ) {
+      alert(data.responseText);
+  });
+
+  // console.log("Done");
+  
+  // doc.fromHTML($('#content').html(), 15, 15, {
+  //   'width': 170,
+  //         'elementHandlers': specialElementHandlers
+  // });
+  // doc.save('sample-file.pdf');
+
+  // console.log("PDF Saved");
+  
+
   // var divContents = $("#"+divName).html();
   // var printWindow = createBrowserWindow();
   // printWindow.document.write('<html><head><title></title>');
@@ -179,6 +199,28 @@ $( document ).ready(function() {
   fetchUserData();
 
   $('#trdate').val(moment().format('YYYY-MM-DD'));
+
+  var d_def = new Date();
+  var year_def = d_def.getFullYear();
+  var month_def = (d_def.getMonth())+1;
+
+  $( "select#rep_year" ).val(year_def.toString());
+  $( "select#rep_month" ).val(month_def.toString());
+
+  $.get( "/getRates",{
+    year: $('#rep_year').val(),
+    month: $('#rep_month').val()
+  })
+  .done(function( data ) {
+    if(data){
+      $('#repPrice').val(data.price);
+      $('#repStamp').val(data.stamp);
+      $('#repTransport').val(data.transport);
+    }
+  })
+  .fail(function( data ) {
+      alert(data.responseText);
+  });
 
   $( "#additionalTypes" ).change(function() {
     
@@ -254,6 +296,111 @@ $( document ).ready(function() {
         alert(data.responseText);
     });
     
+  });
+
+  $('#addTransaction').click(function(){
+
+    $.get( "/addTransaction",{
+      date: $('#trdate').val(),
+      nic: $('#userID').val(),
+      username: $('#userNameInput').val(),
+      grossweight: $('#grossWeight').val(),
+      additionals: additionals
+    })
+    .done(function( data ) {
+        alert("Success");
+    })
+    .fail(function( data ) {
+        alert(data.responseText);
+    });
+    
+  });
+
+  $('#repRateSave').click(function(){
+    $.get( "/saveRates",{
+      year: $('#rep_year').val(),
+      month: $('#rep_month').val(),
+      price: $('#repPrice').val(),
+      stamp: $('#repStamp').val(),
+      transport: $('#repTransport').val()
+    })
+    .done(function( data ) {
+        alert("Success");
+    })
+    .fail(function( data ) {
+        alert(data.responseText);
+    });
+  });
+
+  $('#rep_year').change(function(){
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = (d.getMonth())+1;
+    if(year.toString() === $('#rep_year').val().toString()  &&  month.toString() === $('#rep_month').val().toString()){
+      $('#repPrice').prop('disabled', false);
+      $('#repStamp').prop('disabled', false);
+      $('#repTransport').prop('disabled', false);
+      $('#repRateSave').prop('disabled', false);
+    } else {
+      $('#repPrice').prop('disabled', true);
+      $('#repStamp').prop('disabled', true);
+      $('#repTransport').prop('disabled', true);
+      $('#repRateSave').prop('disabled', true);
+    }
+    $('#repPrice').val("");
+    $('#repStamp').val("");
+    $('#repTransport').val("");
+
+    $.get( "/getRates",{
+      year: $('#rep_year').val(),
+      month: $('#rep_month').val()
+    })
+    .done(function( data ) {
+      if(data){
+        $('#repPrice').val(data.price);
+        $('#repStamp').val(data.stamp);
+        $('#repTransport').val(data.transport);
+      }
+    })
+    .fail(function( data ) {
+        alert(data.responseText);
+    });
+
+  });
+
+  $('#rep_month').change(function(){
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = (d.getMonth())+1;
+    if(year.toString() === $('#rep_year').val().toString()  &&  month.toString() === $('#rep_month').val().toString()){
+      $('#repPrice').prop('disabled', false);
+      $('#repStamp').prop('disabled', false);
+      $('#repTransport').prop('disabled', false);
+      $('#repRateSave').prop('disabled', false);
+    } else {
+      $('#repPrice').prop('disabled', true);
+      $('#repStamp').prop('disabled', true);
+      $('#repTransport').prop('disabled', true);
+      $('#repRateSave').prop('disabled', true);
+    }
+    $('#repPrice').val("");
+    $('#repStamp').val("");
+    $('#repTransport').val("");
+    $.get( "/getRates",{
+      year: $('#rep_year').val(),
+      month: $('#rep_month').val()
+    })
+    .done(function( data ) {
+      if(data){
+        $('#repPrice').val(data.price);
+        $('#repStamp').val(data.stamp);
+        $('#repTransport').val(data.transport);
+      }
+    })
+    .fail(function( data ) {
+        alert(data.responseText);
+    });
+
   });
 
 });
