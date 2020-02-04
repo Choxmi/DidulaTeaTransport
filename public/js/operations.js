@@ -3,6 +3,7 @@ var nicList = [];
 var fullUserList = [];
 var additionals = [];
 var selectedUser = {};
+var transactionList = [];
 
 function autocomplete(inp, arr, ext, prop) {
     /*the autocomplete function takes two arguments,
@@ -38,7 +39,6 @@ function autocomplete(inp, arr, ext, prop) {
                 inp.value = ((this.getElementsByTagName("input")[0].value).split('|'))[0];
                 selectedUser = fullUserList[parseInt(((this.getElementsByTagName("input")[0].value).split('|'))[1])];
                 ext.value = selectedUser[prop];
-                // alert(JSON.stringify(this.getElementsByTagName("label")));
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
@@ -105,63 +105,30 @@ function autocomplete(inp, arr, ext, prop) {
 }
 autocomplete(document.getElementById("userNameInput"), customers, document.getElementById("userID"),"nic");
 autocomplete(document.getElementById("userID"), nicList, document.getElementById("userNameInput"),"name");
+
+autocomplete(document.getElementById("repNIC"), nicList, document.getElementById("repName"),"name");
+autocomplete(document.getElementById("repName"), customers, document.getElementById("repNIC"),"nic");
 // autocomplete(document.getElementById("userSearch"), customers);
 
-function removeAdditional(pos){
-  var removed = additionals.splice(pos,1);
-  generateAdditional();
-}
-
-function createBrowserWindow() {
-  const remote = require('electron').remote;
-  const BrowserWindow = remote.BrowserWindow;
-  const win = new BrowserWindow({
-    height: 595,
-    width: 420
-  });
-  return win;
-}
-
-function printDiv(divName) {
-  // var printContents = document.getElementById(divName).innerHTML;
-  // var originalContents = document.documentElement.innerHTML;
-
-  // window.document.write(printContents);
-
-  // window.print();
-
-  // document.location.reload();
+async function printDiv(nic) {
+  var obj = await getTransactionData(nic);
+  console.log(obj,"getTransactionData");
   
-  console.log("PLEASE PRINT");
-
-$.get( "/generatePDF" )
+  $.get( "/generatePDF",obj )
   .done(function( data ) {
-      alert("Success");
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: data.responseText
+      });
   })
   .fail(function( data ) {
-      alert(data.responseText);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: data.responseText
+    });
   });
-
-  // console.log("Done");
-  
-  // doc.fromHTML($('#content').html(), 15, 15, {
-  //   'width': 170,
-  //         'elementHandlers': specialElementHandlers
-  // });
-  // doc.save('sample-file.pdf');
-
-  // console.log("PDF Saved");
-  
-
-  // var divContents = $("#"+divName).html();
-  // var printWindow = createBrowserWindow();
-  // printWindow.document.write('<html><head><title></title>');
-  // printWindow.document.write('</head><body >');
-  // printWindow.document.write(divContents);
-  // printWindow.document.write('</body></html>');
-  // printWindow.document.close();
-  // printWindow.print();
-
 }
 
 function generateAdditional(){
@@ -179,6 +146,29 @@ function generateAdditional(){
   $('#tableContainer').append(content);
 }
 
+function getUser(nic){
+  var out = {};
+  $.ajax({
+    url: "/getUser",
+    data: {nic},
+    type: 'GET',
+    async: false,
+    cache: false,
+    timeout: 30000,
+    error: function(){
+        return false;
+    },
+    success: function(data){ 
+      console.log(data);
+      out = data;
+      return data;
+    }
+});
+console.log(out),"Returning";
+
+return out;
+}
+
 function fetchUserData(){
   $.get( "/listUsers")
   .done(function( data ) {
@@ -190,8 +180,90 @@ function fetchUserData(){
       }
   })
   .fail(function( data ) {
-      alert(data.responseText);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: data.responseText
+    });
   });
+}
+
+function fetchTransaction(year,month){
+  $.get( "/listTransactions",{
+    year,
+    month
+  })
+  .done(function( data ) {
+    transactionList = data;
+  })
+  .fail(function( data ) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: data.responseText
+    });
+  });
+}
+
+function getTransactionData(nicID){
+    var nic = nicID;
+    var gross = 0;
+    var loss = 0;
+    var adv = 0;
+    var tea = 0;
+    var fer = 0;
+    var dol = 0;
+    var ded = 0;
+    var poi = 0;
+    var total = 0;
+
+    var user = {};
+    user = getUser(nicID);
+    console.log(user);
+    
+    var d_def = new Date();
+    var year_def = d_def.getFullYear();
+    var month_def = (d_def.getMonth())+1;
+
+    fetchTransaction(year_def,month_def);
+
+    transactionList.forEach(transaction => {
+      if(transaction.nic === nic){
+        gross += parseFloat(transaction.grossWeight);
+        adv += parseFloat(transaction.add0_amount);
+        tea += parseFloat(transaction.add4_amount);
+        fer += parseFloat(transaction.add1_amount);
+        dol += parseFloat(transaction.add3_amount);
+        ded += parseFloat(transaction.add5_amount);
+        poi += parseFloat(transaction.add2_amount);
+      }
+    });
+    var gross_amount = gross * parseFloat($('#repPrice').val());
+    var deduct = loss+adv+tea+fer+dol+ded+poi+parseFloat($('#repStamp').val())+parseFloat($('#repTransport').val());
+    total = gross_amount - deduct;
+
+    return {
+      month_string: $( "#rep_year").val() +" - "+$( "#rep_month option:selected" ).html(),
+      grossweight: gross,
+      rupees: total,
+      cents: total,
+      name: user.name,
+      address: user.address,
+      uid: user.nic,
+      price: $('#repPrice').val(),
+      total_amount: gross_amount,
+      addi0: adv,
+      transport: $('#repTransport').val(),
+      addi1: fer,
+      addi5: ded,
+      addi4: tea,
+      stamps: $('#repStamp').val(),
+      addi3: dol,
+      total_deduct: deduct,
+      total_pay: total,
+      month: $("#rep_month").val(),
+      year: $( "#rep_year").val()
+    };
 }
 
 $( document ).ready(function() {
@@ -207,6 +279,8 @@ $( document ).ready(function() {
   $( "select#rep_year" ).val(year_def.toString());
   $( "select#rep_month" ).val(month_def.toString());
 
+  fetchTransaction(year_def,month_def);
+
   $.get( "/getRates",{
     year: $('#rep_year').val(),
     month: $('#rep_month').val()
@@ -219,7 +293,11 @@ $( document ).ready(function() {
     }
   })
   .fail(function( data ) {
-      alert(data.responseText);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: data.responseText
+    });
   });
 
   $( "#additionalTypes" ).change(function() {
@@ -282,7 +360,11 @@ $( document ).ready(function() {
       additionals.push({index: $( "#additionalTypes" ).val(), col1: $( "#additionalTypes option:selected" ).html(), col2: $('#additional1').val(), col3: $('#additional2').val()});
       generateAdditional();
     } else {
-      alert("Record Exist");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "Record Exist"
+      });
     }
   });
 
@@ -290,28 +372,48 @@ $( document ).ready(function() {
     
     $.get( "/addUser",{nic: $('#userNIC').val(),name: $('#userNameField').val(),mobile: $('#userMobile').val(),account: $('#userAccount').val(),address: $('#userAddress').val()})
     .done(function( data ) {
-        alert("Success");
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: "done"
+      });
     })
     .fail(function( data ) {
-        alert(data.responseText);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: data.responseText
+      });
     });
     
   });
 
   $('#addTransaction').click(function(){
-
+    var dateSplitted = ($('#trdate').val()).split("-");
+    console.log(dateSplitted);
+    
     $.get( "/addTransaction",{
-      date: $('#trdate').val(),
+      month: dateSplitted[1],
+      date: dateSplitted[2],
+      year: dateSplitted[0],
       nic: $('#userID').val(),
       username: $('#userNameInput').val(),
       grossweight: $('#grossWeight').val(),
       additionals: additionals
     })
     .done(function( data ) {
-        alert("Success");
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: "done"
+      });
     })
     .fail(function( data ) {
-        alert(data.responseText);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: data.responseText
+      });
     });
     
   });
@@ -325,10 +427,18 @@ $( document ).ready(function() {
       transport: $('#repTransport').val()
     })
     .done(function( data ) {
-        alert("Success");
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Done'
+        });
     })
     .fail(function( data ) {
-        alert(data.responseText);
+      Swal.fire({
+        icon: 'Error',
+        title: 'Error occured',
+        text: 'Done'
+      });
     });
   });
 
@@ -363,8 +473,14 @@ $( document ).ready(function() {
       }
     })
     .fail(function( data ) {
-        alert(data.responseText);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: data.responseText
+      });
     });
+
+    fetchTransaction($('#rep_year').val(),$('#rep_month').val());
 
   });
 
@@ -398,9 +514,81 @@ $( document ).ready(function() {
       }
     })
     .fail(function( data ) {
-        alert(data.responseText);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: data.responseText
+        });
     });
 
+    fetchTransaction($('#rep_year').val(),$('#rep_month').val());
+
+  });
+
+  $('#repNIC').focusout(function(){
+    var nic = $('#repNIC').val();
+    var gross = 0;
+    var loss = 0;
+    var adv = 0;
+    var tea = 0;
+    var fer = 0;
+    var dol = 0;
+    var ded = 0;
+    var poi = 0;
+    var total = 0;
+    transactionList.forEach(transaction => {
+      
+      if(transaction.nic === nic){
+        gross += parseFloat(transaction.grossWeight);
+        adv += parseFloat(transaction.add0_amount);
+        tea += parseFloat(transaction.add4_amount);
+        fer += parseFloat(transaction.add1_amount);
+        dol += parseFloat(transaction.add3_amount);
+        ded += parseFloat(transaction.add5_amount);
+        poi += parseFloat(transaction.add2_amount);
+      }
+    });
+    $('#repGross').html(gross);
+    $('#repLoss').html(loss);
+    $('#repAdv').html(adv);
+    $('#repTea').html(tea);
+    $('#repFer').html(fer);
+    $('#repDol').html(dol);
+    $('#repOther').html(ded);
+    $('#repPoi').html(poi);
+    var gross_amount = gross * parseFloat($('#repPrice').val());
+    var deduct = loss+adv+tea+fer+dol+ded+poi+parseFloat($('#repStamp').val())+parseFloat($('#repTransport').val());
+    $('#repDed').html(deduct);
+    $('#repTotal').html(gross_amount-deduct);
+  });
+
+  $('#repGenerate').click(function(){
+    printDiv($('#repNIC').val());
+  });
+
+  $('#repGenerateAll').click(function(){
+    fetchUserData();
+    nicList.forEach(nic => {
+      printDiv(nic);
+    });
+  });
+
+  $('#repPrintAll').click(function(){
+    $.get( "/printAllPDF",{ folder: $( "#rep_year").val() +" - "+$( "#rep_month option:selected" ).html() } )
+    .done(function( data ) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: "Done"
+      });
+    })
+    .fail(function( data ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: data.responseText
+      });
+    });
   });
 
 });

@@ -6,13 +6,17 @@ const publicPath = path.resolve(__dirname, "public");
 const { BrowserWindow } = require('electron');
 var bodyParser = require('body-parser');
 const fs = require('fs');
+var printer = require("pdf-to-printer");
 app.use(express.static('css'));
 app.use(express.static('img'));
 app.use(express.static('js'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 app.use(express.static(publicPath));
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
  
 const db = new sqlite3.Database('./didula_db.db');
 
@@ -24,7 +28,9 @@ db.run('CREATE TABLE IF NOT EXISTS users(nic VARCHAR(20) PRIMARY KEY NOT NULL, n
 <option value="4">තේ කොළ/Pkt</option>
 <option value="5">වෙනත්</option> */}
 db.run(`CREATE TABLE IF NOT EXISTS transactions(
-    date TEXT,
+    year INTEGER,
+    month INTEGER,
+    date INTEGER,
     nic VARCHAR(20),
     username VARCHAR(100),
     grossWeight INTEGER DEFAULT 0,
@@ -43,16 +49,16 @@ db.run(`CREATE TABLE IF NOT EXISTS transactions(
     add4_amount INTEGER DEFAULT 0,
     add5_amount INTEGER DEFAULT 0,
     add5_comments TEXT  DEFAULT NULL,
-    PRIMARY KEY(nic,date)
+    PRIMARY KEY(nic,date,month,year)
 )`);
-db.run('CREATE TABLE IF NOT EXISTS rates(year INT, month INT, price REAL, stamp REAL, transport REAL)');
+db.run('CREATE TABLE IF NOT EXISTS rates(year INT, month INT, price REAL, stamp REAL, transport REAL, PRIMARY KEY(year,month))');
 
 app.get('/', function (req, res) {
     res.render("index",{});
 });
 
 app.get('/addTransaction',(req, res)=>{
-    var query = "INSERT INTO transactions(date,nic,username,grossweight";
+    var query = "INSERT INTO transactions(year,month,date,nic,username,grossweight";
     (req.query.additionals).forEach(additional => {
         if(additional.index === "0"){
             query += (",add0_amount");
@@ -66,7 +72,7 @@ app.get('/addTransaction',(req, res)=>{
         }
     });
     query += (") VALUES (");
-    query += "?,?,?,?";
+    query += "?,?,?,?,?,?";
     (req.query.additionals).forEach(additional => {
         if(additional.index === "0"){
             query += ",?";
@@ -79,7 +85,9 @@ app.get('/addTransaction',(req, res)=>{
     query += ")";
 
     var params = [];
-    params.push(req.query.date);
+    params.push(parseInt(req.query.year));
+    params.push(parseInt(req.query.month));
+    params.push(parseInt(req.query.date));
     params.push(req.query.nic);
     params.push(req.query.username);
     params.push(req.query.grossweight);
@@ -142,6 +150,22 @@ app.get('/listUsers',(req,res)=>{
     });
 });
 
+app.get('/listTransactions',(req,res)=>{
+    let sql = `SELECT * FROM transactions WHERE year = ? AND month = ?`;
+    var transactions = [];
+    console.log(parseInt(req.query.year),parseInt(req.query.month));
+    
+    db.all(sql, [parseInt(req.query.year),parseInt(req.query.month)], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        rows.forEach((row) => {
+            transactions.push(row);
+        });
+        res.send(transactions);
+    });
+});
+
 app.get('/saveRates',(req,res)=>{
     let sql = "INSERT OR REPLACE INTO rates(year,month,price,stamp,transport) VALUES(?,?,?,?,?)";
     let params = [req.query.year,req.query.month,req.query.price,req.query.stamp,req.query.transport];
@@ -167,25 +191,17 @@ app.get('/getRates',(req,res)=>{
 });
 
 app.get('/generateReport',(req,res)=>{
-    res.render("report",{});
+    console.log(req.query.data,"ReqQuery");
+    
+    res.render("report",JSON.parse(req.query.data));
 });
 
 app.get('/generatePDF',(req,res)=>{
-    // var doc = new jsPDF();
-    // console.log("Generating PDF");
+    console.log(req.query,"pdf Gen");
     
-    // doc.fromHTML(req.query.element, 15, 15, {
-    //     'width': 170,
-    //           'elementHandlers': req.query.handler
-    //   });
-    //   doc.save('sample-file.pdf');
-    console.log("Generate Started");
-    var fullUrl = req.protocol + '://' + req.get('host') + '/generateReport';
-    console.log(fullUrl);
-    
+    var fullUrl = req.protocol + '://' + req.get('host') + '/generateReport?data='+JSON.stringify(req.query);
     let window_to_PDF = new BrowserWindow({});//to just open the browser in background
     window_to_PDF.loadURL(fullUrl); //give the file link you want to display
-    console.log("HTML Loaded");
     
     function pdfSettings() {
         var paperSizeArray = ["A4", "A5"];
@@ -198,23 +214,20 @@ app.get('/generatePDF',(req,res)=>{
         };
     return option;
     }
-
-    console.log("Setting Calculated");
-    
-
     window_to_PDF.webContents.on('did-finish-load', () => {
-        console.log("Loaded");
-        
         window_to_PDF.webContents.printToPDF(pdfSettings(), function(err, data) {
-            console.log("Started Printing");
-            
             if (err) {
                 console.log(err);
                 return;
             }
             try{
-                fs.writeFileSync('./generated_pdf.pdf', data);
-                console.log("Generated");
+                if (!fs.existsSync('./MonthlyReports')){
+                    fs.mkdirSync('./MonthlyReports');
+                }
+                if (!fs.existsSync('./MonthlyReports/'+req.query.month_string)){
+                    fs.mkdirSync('./MonthlyReports/'+req.query.month_string);
+                }
+                fs.writeFileSync('./MonthlyReports/'+req.query.month_string+'/'+req.query.uid+'_'+req.query.name+'.pdf', data);
                 window_to_PDF.close();
                 res.status(200).send();
             }catch(err){
@@ -224,6 +237,41 @@ app.get('/generatePDF',(req,res)=>{
         
         })
     });
+});
+
+app.get('/getUser',(req,res)=>{
+    let sql = "SELECT * FROM users WHERE nic = ?";
+    let params = [req.query.nic];
+    console.log(params);
+    
+    db.get(sql, params, (err, row) => {
+        if(err){
+            return;
+        }
+        console.log(row);
+        
+        res.status(200).send(row);
+    });
+});
+
+app.get('/printAllPDF',(req,res)=>{
+    var dirname = './MonthlyReports/'+req.query.folder+'/'
+    console.log(dirname);
+    
+    fs.readdir(dirname, function(err, filenames) {
+        if (err) {
+          onError(err);
+          return;
+        }
+        filenames.forEach(function(filename) {
+            var file_loc = dirname+filename;
+            console.log(file_loc);
+            printer
+            .print(file_loc)
+            .then(console.log)
+            .catch(console.error);
+        });
+      });
 });
  
 app.listen(3000)
