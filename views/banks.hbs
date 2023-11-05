@@ -1,0 +1,26 @@
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="css/debt.css">
+    </head>
+    <body style="text-align: center;">
+        <h1>{{bank}} Customers</h1>
+        <table>
+            <thead>
+                <tr>
+                <td>User Name</td>
+                <td>Account Number</td>
+                <td>Amount (Rs.)</td>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each bankArr}}
+            <tr>
+                <td>{{user.name}}</td>
+                <td>{{user.account}}</td>
+                <td>{{total}}</td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </body>
+</html>

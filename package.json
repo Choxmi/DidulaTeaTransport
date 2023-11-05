@@ -17,8 +17,8 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^6.1.7",
-    "electron-rebuild": "^1.10.0"
+    "@electron/rebuild": "^3.3.0",
+    "electron": "^26.4.3"
   },
   "dependencies": {
     "blueimp-gallery": "^2.35.0",
@@ -30,7 +30,6 @@
     "nodemon": "^2.0.2",
     "pdf-to-printer": "^1.1.2",
     "screenfull": "^5.0.0",
-    "sqlite": "^3.0.3",
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^5.1.6"
   }
 }

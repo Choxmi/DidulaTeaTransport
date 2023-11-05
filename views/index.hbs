@@ -6,12 +6,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" href="css/sweetalert2.min.css"
-</head>
+    <link rel="stylesheet" href="css/sweetalert2.min.css" </head>
 
 <body>
     <div class="ct" id="t1">
-        <div class="topright" id="closeButton"><img src="close.png"/></div>
+        <div class="topright" id="closeButton"><img src="close.png" /></div>
         <div class="ct" id="t2">
             <div class="ct" id="t3">
                 <div class="ct" id="t4">
@@ -45,101 +44,142 @@
                                 <div class="section-container">
                                     <div class="autocomplete" style="width:auto;">
                                         <p class="descriptor">Date</p>
-                                        <input type="date" id="trdate" class="form-control form-rounded"/>
-                                      </div>
-                                    </div>
-                                <div class="section-container">
-                                <div class="autocomplete" style="width:auto;">
-                                    <p class="descriptor">NIC</p>
-                                    <input id="userID" type="text" name="userid" class="form-control form-rounded" placeholder="ID">
+                                        <input type="date" id="trdate" class="form-control form-rounded" />
                                     </div>
                                 </div>
                                 <div class="section-container">
-                                <div class="autocomplete" style="width:auto;">
-                                    <p class="descriptor">Username</p>
-                                    <input id="userNameInput" type="text" name="username" class="form-control form-rounded" placeholder="Username">
-                                  </div>
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Member ID</p>
+                                        <input id="memID" type="text" name="memID" class="form-control form-rounded"
+                                            placeholder="Member ID">
+                                    </div>
                                 </div>
                                 <div class="section-container">
-                                <div class="autocomplete" style="width:auto;">
-                                    <p class="descriptor">Gross Weight</p>
-                                    <input id="grossWeight" type="text" name="grossweight" class="form-control form-rounded" placeholder="Gross Weight">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Username</p>
+                                        <input id="userNameInput" type="text" name="username"
+                                            class="form-control form-rounded" placeholder="Username">
+                                    </div>
                                 </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Gross Weight</p>
+                                        <input id="grossWeight" type="text" name="grossweight"
+                                            class="form-control form-rounded" placeholder="Gross Weight">
+                                    </div>
                                 </div>
                                 <div class="section-container">
                                     <div class="autocomplete" style="width:100%;">
-                                    <p class="descriptor">Additional Expenses</p>
-                                    <div style="display: flex;">
-                                        <div class="flex-content"></div>
-                                        <div class="flex-content">
-                                            <select id="additionalTypes" class="form-control form-rounded">
-                                                <option value="0">අත්තිකාරම්</option>
-                                                <option value="1">පොහොර/25Kg</option>
-                                                <option value="2">වල් නාශක/Bottle</option>
-                                                <option value="3">ඩොලමයිට්/Pkt</option>
-                                                <option value="4">තේ කොළ/Pkt</option>
-                                                <option value="5">වෙනත්</option>
-                                            </select>
+                                        <p class="descriptor">Additional Expenses</p>
+                                        <div style="display: flex;">
+                                            <div class="flex-content"></div>
+                                            <div class="flex-content">
+                                                <select id="additionalTypes" class="form-control form-rounded">
+                                                    <option value="0">අත්තිකාරම්</option>
+                                                    <option value="1">පොහොර/25Kg</option>
+                                                    <option value="2">වල් නාශක/Bottle</option>
+                                                    <option value="3">ඩොලමයිට්/Pkt</option>
+                                                    <option value="4">තේ කොළ/Pkt</option>
+                                                    <option value="5">වෙනත්</option>
+                                                </select>
+                                            </div>
+                                            <div class="flex-content"><input id="additional1" type="text"
+                                                    name="additional1" class="form-control form-rounded"
+                                                    placeholder="Amount(Rs.)"></div>
+                                            <div class="flex-content"><input id="additional2" type="text"
+                                                    name="additional2" class="form-control form-rounded" placeholder=""
+                                                    disabled></div>
+                                            <div class="flex-content"><button class="btn btn-success"
+                                                    id="addAdditional"><i class="fas fa-plus-circle"></i></button></div>
                                         </div>
-                                        <div class="flex-content"><input id="additional1" type="text" name="additional1" class="form-control form-rounded" placeholder="Amount(Rs.)"></div>
-                                        <div class="flex-content"><input id="additional2" type="text" name="additional2" class="form-control form-rounded" placeholder="" disabled></div>
-                                        <div class="flex-content"><button class="btn btn-success" id="addAdditional"><i class="fas fa-plus-circle"></i></button></div>
                                     </div>
                                 </div>
+
+                                <div class="section-container">
+                                    <div id="tableContainer">
+                                    </div>
                                 </div>
-                                
-                            <div class="section-container">
-                                <div id="tableContainer">
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <button class="btn btn-success" id="addTransaction"><i
+                                                class="fas fa-check-circle"> submit</i></button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="section-container">
-                                <div class="autocomplete" style="width:auto;">
-                                    <button class="btn btn-success" id="addTransaction"><i class="fas fa-check-circle">  submit</i></button>
-                                </div>
-                            </div>
                             </section>
                         </div>
                         <div class="page" id="p3">
                             <section class="icon section-size">
                                 <div class="section-container">
                                     <div class="autocomplete" style="width:auto;">
-                                        <p class="descriptor">NIC</p>
-                                        <input id="userNIC" type="text" name="nic" class="form-control form-rounded" placeholder="NIC">
-                                      </div>
+                                        <p class="descriptor">Member ID</p>
+                                        <input id="memberID" type="text" name="id" class="form-control form-rounded"
+                                            placeholder="Member ID">
                                     </div>
-                                    <div class="section-container">
-                                        <div class="autocomplete" style="width:auto;">
-                                            <p class="descriptor">Name</p>
-                                            <input id="userNameField" type="text" name="name" class="form-control form-rounded" placeholder="Name">
-                                          </div>
-                                        </div>
-                                        <div class="section-container">
-                                            <div class="autocomplete" style="width:auto;">
-                                                <p class="descriptor">Mobile No.</p>
-                                                <input id="userMobile" type="text" name="mobile" class="form-control form-rounded" placeholder="Mobile No.">
-                                              </div>
-                                            </div>
-                                            <div class="section-container">
-                                                <div class="autocomplete" style="width:auto;">
-                                                    <p class="descriptor">Account No.</p>
-                                                    <input id="userAccount" type="text" name="username" class="form-control form-rounded" placeholder="Account No.">
-                                                  </div>
-                                                </div>
-                                                <div class="section-container">
-                                                    <div class="autocomplete" style="width:auto;">
-                                                        <p class="descriptor">Address</p>
-                                                        <input id="userAddress" type="text" name="username" class="form-control form-rounded" placeholder="Address">
-                                                      </div>
-                                                    </div>
-                                                    <div class="section-container"><button class="btn btn-success" id="createUser"><i class="fas fa-check-circle">  submit</i></button></div>
+                                </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">NIC</p>
+                                        <input id="userNIC" type="text" name="nic" class="form-control form-rounded"
+                                            placeholder="NIC">
+                                    </div>
+                                </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Name</p>
+                                        <input id="userNameField" type="text" name="name"
+                                            class="form-control form-rounded" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Mobile No.</p>
+                                        <input id="userMobile" type="text" name="mobile"
+                                            class="form-control form-rounded" placeholder="Mobile No.">
+                                    </div>
+                                </div>
+                                <div class="section-container">
+
+                                </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Bank</p>
+                                        <select id="userBank" class="form-control form-rounded">
+                                            <option value="">None</option>
+                                            <option value="0">Sampath Bank</option>
+                                            <option value="1">BOC</option>
+                                            <option value="2">Peoples' Bank</option>
+                                            <option value="3">Rural Bank</option>
+                                            <option value="4">RDB</option>
+                                            <option value="5">NSB</option>
+                                            <option value="6">SDB</option>
+                                        </select>
+                                    </div>
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Account No.</p>
+                                        <input id="userAccount" type="text" name="username"
+                                            class="form-control form-rounded" placeholder="Account No.">
+                                    </div>
+                                </div>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;">
+                                        <p class="descriptor">Address</p>
+                                        <input id="userAddress" type="text" name="username"
+                                            class="form-control form-rounded" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="section-container">
+                                    <button class="btn btn-success" id="createUser">
+                                        <i="fas fa-check-circle"> submit</i>
+                                    </button>
+                                </div>
                             </section>
                         </div>
                         <div class="page" id="p4">
                             <section class="icon section-size">
                                 <div class="section-container">
                                     <div class="autocomplete" style="width:auto;display:flex;">
-                                        <div  class="flex-content"></div>
-                                        <div  class="flex-content">
+                                        <div class="flex-content"></div>
+                                        <div class="flex-content">
                                             <p class="descriptor">Year</p>
                                             <select id="rep_year" class="form-control form-rounded">
                                                 <option value="2020">2020</option>
@@ -153,9 +193,19 @@
                                                 <option value="2028">2028</option>
                                                 <option value="2029">2029</option>
                                                 <option value="2030">2030</option>
+                                                <option value="2031">2031</option>
+                                                <option value="2032">2032</option>
+                                                <option value="2033">2033</option>
+                                                <option value="2034">2034</option>
+                                                <option value="2035">2035</option>
+                                                <option value="2036">2036</option>
+                                                <option value="2037">2037</option>
+                                                <option value="2038">2038</option>
+                                                <option value="2039">2039</option>
+                                                <option value="2040">2040</option>
                                             </select>
                                         </div>
-                                        <div  class="flex-content">
+                                        <div class="flex-content">
                                             <p class="descriptor">Month</p>
                                             <select id="rep_month" class="form-control form-rounded">
                                                 <option value="1">ජනවාරි</option>
@@ -172,34 +222,47 @@
                                                 <option value="12">දෙසැම්බර්</option>
                                             </select>
                                         </div>
-                                        <div  class="flex-content"></div>
+                                        <div class="flex-content"></div>
                                     </div>
                                 </div>
                                 <div class="section-container">
                                     <div class="autocomplete" style="width:auto;display:flex">
-                                        <div  class="flex-content"></div>
-                                        <div  class="flex-content">
-                                        <p class="descriptor">කිලෝවක මිල</p>
-                                        <input id="repPrice" type="text" name="name" class="form-control form-rounded" placeholder="කිලෝවක මිල"></div>
-                                        <div  class="flex-content">
-                                        <p class="descriptor">මුද්දර ගාස්තු</p>
-                                        <input id="repStamp" type="text" name="name" class="form-control form-rounded" placeholder="මුද්දර ගාස්තු"></div>
-                                        <div  class="flex-content">
-                                        <p class="descriptor">ප්‍රවාහන ගාස්තු</p>
-                                        <input id="repTransport" type="text" name="name" class="form-control form-rounded" placeholder="ප්‍රවාහන ගාස්තු"></div>
-                                        <div  class="flex-content"><button class="btn btn-success" id="repRateSave"><i class="fas fa-check-circle">  Save</i></button></div>
+                                        <div class="flex-content">
+                                            <p class="descriptor">අඩු කිරීම් ප්‍රතිශතය(%)</p>
+                                            <input id="repPercent" type="text" name="name"
+                                                class="form-control form-rounded" placeholder="අඩු කිරීම් ප්‍රතිශතය(%)">
+                                        </div>
+                                        <div class="flex-content">
+                                            <p class="descriptor">කිලෝවක මිල</p>
+                                            <input id="repPrice" type="text" name="name"
+                                                class="form-control form-rounded" placeholder="කිලෝවක මිල">
+                                        </div>
+                                        <div class="flex-content">
+                                            <p class="descriptor">මුද්දර ගාස්තු</p>
+                                            <input id="repStamp" type="text" name="name" value="0"
+                                                class="form-control form-rounded" placeholder="මුද්දර ගාස්තු">
+                                        </div>
+                                        <div class="flex-content">
+                                            <p class="descriptor">ප්‍රවාහන ගාස්තු</p>
+                                            <input id="repTransport" type="text" name="name"
+                                                class="form-control form-rounded" placeholder="ප්‍රවාහන ගාස්තු">
+                                        </div>
+                                        <div class="flex-content"><button class="btn btn-success" id="repRateSave"><i
+                                                    class="fas fa-check-circle"> Save</i></button></div>
                                     </div>
                                 </div>
                                 <div class="section-container">
                                     <div class="autocomplete" style="width:auto;">
-                                        <p class="descriptor">NIC</p>
-                                        <input id="repNIC" type="text" name="nic" class="form-control form-rounded" placeholder="NIC">
-                                        </div>
+                                        <p class="descriptor">Member ID</p>
+                                        <input id="repNIC" type="text" name="nic" class="form-control form-rounded"
+                                            placeholder="Member ID">
                                     </div>
+                                </div>
                                 <div class="section-container">
                                     <div class="autocomplete" style="width:auto;">
                                         <p class="descriptor">Name</p>
-                                        <input id="repName" type="text" name="name" class="form-control form-rounded" placeholder="Name">
+                                        <input id="repName" type="text" name="name" class="form-control form-rounded"
+                                            placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="section-container rep-full">
@@ -221,7 +284,7 @@
                                         <div style="flex: 2;font-size: 15px;">
                                             තේ කොළ:
                                         </div>
-                                        <div style="flex: 2;font-size: 15px;"  id="repTea"></div>
+                                        <div style="flex: 2;font-size: 15px;" id="repTea"></div>
                                     </div>
                                     <div style="display: flex;">
                                         <div style="flex: 2;font-size: 15px;">
@@ -231,7 +294,7 @@
                                         <div style="flex: 2;font-size: 15px;">
                                             ඩොලමයිට්:
                                         </div>
-                                        <div style="flex: 2;font-size: 15px;"  id="repDol"></div>
+                                        <div style="flex: 2;font-size: 15px;" id="repDol"></div>
                                     </div>
                                     <div style="display: flex;">
                                         <div style="flex: 2;font-size: 15px;">
@@ -247,10 +310,12 @@
                                     </div>
                                     <div style="display: flex;">
                                         <div style="flex: 2;font-size: 15px;">
-                                            Other Expenses:
+                                            හිග මුදල්:
                                         </div>
                                         <div style="flex: 2;font-size: 15px;">
-                                            <input id="repOtherAdd" type="text" name="name" class="form-control form-rounded" placeholder="Other Expenses">
+                                            <input id="repOtherAdd" type="text" name="name"
+                                                class="form-control form-rounded" placeholder="හිග මුදල්">
+                                            <button id="repOtherAddSave">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -260,26 +325,116 @@
                                             මුළු අඩු කිරීම්:
                                         </div>
                                         <div style="flex: 2;font-size: 15px;" id="repDed"></div>
-                                        <div style="flex: 2;font-size: 15px;" id="repTotal"></div>
                                         <div style="flex: 2;font-size: 15px;">
                                             ගෙවීමට ඇති ඉතිරි/හිඟ මුදල:
                                         </div>
+                                        <div style="flex: 2;font-size: 15px;" id="repTotal"></div>
                                     </div>
                                 </div>
                                 <div class="section-container">
                                     <div class="autocomplete" style="width:auto;display:flex">
-                                        <div  class="flex-content"></div>
-                                        <div  class="flex-content"><button class="btn btn-success" id="repGenerate"><i class="fas fa-check-circle">  generate</i></button></div>
-                                        <div  class="flex-content"><button class="btn btn-success" id="repGenerateAll"><i class="fas fa-check-circle">  generate all</i></button></div>
-                                        <div  class="flex-content"><button class="btn btn-success" id="repPrintAll"><i class="fas fa-check-circle">  print all</i></button></div>
-                                        <div  class="flex-content"></div>
+                                        <div class="flex-content"></div>
+                                        <div class="flex-content"><button class="btn btn-success" id="repGenerate"><i
+                                                    class="fas fa-check-circle"> generate</i></button></div>
+                                        <div class="flex-content"><button class="btn btn-success" id="repGenerateAll"><i
+                                                    class="fas fa-check-circle"> generate all</i></button></div>
+                                        <div class="flex-content"><button class="btn btn-success" id="repGenerateBanks"><i
+                                                    class="fas fa-check-circle"> generate Bank List</i></button></div>
+                                        <div class="flex-content"><button class="btn btn-success" id="repPrintAll"><i
+                                                    class="fas fa-check-circle"> print all</i></button></div>
+                                        <div class="flex-content"><button class="btn btn-success" id="repPrintOne"><i
+                                                    class="fas fa-check-circle"> print</i></button></div>
                                     </div>
                                 </div>
                             </section>
                         </div>
                         <div class="page" id="p5">
-                            <section class="icon fa fa-plus-circle">
-                                
+                            <section class="icon section-size">
+                                <br/>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;display:flex;">
+                                        <div class="flex-content">
+                                            <p class="descriptor">Year</p>
+                                            <select id="rep_year_rep" class="form-control form-rounded">
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2026">2026</option>
+                                                <option value="2027">2027</option>
+                                                <option value="2028">2028</option>
+                                                <option value="2029">2029</option>
+                                                <option value="2030">2030</option>
+                                                <option value="2031">2031</option>
+                                                <option value="2032">2032</option>
+                                                <option value="2033">2033</option>
+                                                <option value="2034">2034</option>
+                                                <option value="2035">2035</option>
+                                                <option value="2036">2036</option>
+                                                <option value="2037">2037</option>
+                                                <option value="2038">2038</option>
+                                                <option value="2039">2039</option>
+                                                <option value="2040">2040</option>
+                                            </select>
+                                        </div>
+                                        <div class="flex-content">
+                                            <p class="descriptor">Month</p>
+                                            <select id="rep_month_rep" class="form-control form-rounded">
+                                                <option value="1">ජනවාරි</option>
+                                                <option value="2">පෙබරවාරි</option>
+                                                <option value="3">මාර්තු</option>
+                                                <option value="4">අප්‍රේල්</option>
+                                                <option value="5">මැයි</option>
+                                                <option value="6">ජූනි</option>
+                                                <option value="7">ජූලි</option>
+                                                <option value="8">අගෝස්තු</option>
+                                                <option value="9">සැප්තැම්බර්</option>
+                                                <option value="10">ඔක්තෝම්බර්</option>
+                                                <option value="11">නොවැම්බර්</option>
+                                                <option value="12">දෙසැම්බර්</option>
+                                            </select>
+                                        </div>
+                                        <div class="flex-content">
+                                            <p class="descriptor">Member ID</p>
+                                            <input id="viewMemID" type="text" name="MemberID"
+                                                class="form-control form-rounded" placeholder="MemberID">
+                                        </div>
+                                        <div class="flex-content">
+                                            <p class="descriptor">Username</p>
+                                            <input id="viewMemName" type="text" name="MemberName"
+                                                class="form-control form-rounded" placeholder="MemberName" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="section-container">
+                                    <div class="autocomplete" style="width:auto;display:flex">
+                                        <div class="flex-content"><button class="btn btn-success" id="repPrintSummary"><i
+                                                    class="fas fa-check-circle"> Generate Monthly Report</i></button></div>
+                                    </div>
+                                </div>
+                                <div class="section-container">
+                                    <div class="tbl-container">
+                                    <table style="margin-top: 20px;" id="tTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>grossWeight</th>
+                                                <th>අත්තිකාරම්</th>
+                                                <th>පොහොර/25Kg</th>
+                                                <th>වල් නාශක/Bottle</th>
+                                                <th>ඩොලමයිට්/Pkt</th>
+                                                <th>තේ කොළ/Pkt</th>
+                                                <th>වෙනත්</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="viewTbl">
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
                             </section>
                         </div>
                     </div>
@@ -287,7 +442,27 @@
             </div>
         </div>
     </div>
-    
+
+    <dialog id="myDialog">
+        <div style="display: flex;"><label>Date : </label><label id="viewDate"></label></div>
+        <div class="flex-content">
+            <p class="descriptor">Gross Weight</p>
+            <input id="viewGrossWeight" type="text" name="GrossWeight"
+                class="form-control form-rounded" placeholder="Gross Weight">
+        </div>
+        <br>
+        <div style="display: flex;"><label>අත්තිකාරම්: </label><input id="viewAdd0UnitPrice" type="text" class="form-control form-rounded"></div>
+        <div style="display: flex;"><label>පොහොර: </label><input id="viewAdd1UnitPrice" type="text" class="form-control form-rounded"><input id="viewAdd1Units" type="text" class="form-control form-rounded"><input id="viewAdd1Amount" type="text" class="form-control form-rounded"></div>
+        <div style="display: flex;"><label>වල් නාශක: </label><input id="viewAdd2UnitPrice" type="text" class="form-control form-rounded"><input id="viewAdd2Units" type="text" class="form-control form-rounded"><input id="viewAdd2Amount" type="text" class="form-control form-rounded"></div>
+        <div style="display: flex;"><label>ඩොලමයිට්: </label><input id="viewAdd3UnitPrice" type="text" class="form-control form-rounded"><input id="viewAdd3Units" type="text" class="form-control form-rounded"><input id="viewAdd3Amount" type="text" class="form-control form-rounded"></div>
+        <div style="display: flex;"><label>තේ කොළ: </label><input id="viewAdd4UnitPrice" type="text" class="form-control form-rounded"><input id="viewAdd4Units" type="text" class="form-control form-rounded"><input id="viewAdd4Amount" type="text" class="form-control form-rounded"></div>
+        <div style="display: flex;"><label>වෙනත්: </label><input id="viewAdd5Amount" type="text" class="form-control form-rounded"><input id="viewAdd5Comments" type="text" class="form-control form-rounded"></div>
+        <div style="display: flex;">
+        <button onclick="updateTransaction()">Update</button>
+        <button type="button" class="btn btn-danger" onclick="deleteTransaction()">Delete</button>
+        </div>
+    </dialog>
+
     <script src="js/propper.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/jquery.js"></script>

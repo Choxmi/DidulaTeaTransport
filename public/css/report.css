@@ -1,5 +1,17 @@
+p {
+    font-size: 17px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
 .report-p {
-    font-size: 11px;
+    font-size: 16px;
     margin: 0 !important;
 }
 
@@ -26,4 +38,61 @@
 .basics {
     text-align: left;
     margin-left: 5%;
+}
+
+.detail-container {
+    display: block;
+    overflow: auto;
+}
+
+.detail-container div {
+    width: 25%;
+    float: left;
+}
+
+.detail-container div p {
+    height: 20px;
+}
+
+.detail-container div p strong {
+    font-size: 14px;
+}
+
+.summary-container {
+    display: block;
+    overflow: auto;
+}
+
+.summary-container div {
+    width:50%;
+    float: left;
+}
+
+.summary-container div p {
+    height: 20px;
+}
+
+.summary-container div p strong {
+    font-size: 14px;
+}
+
+.summary-container .data-list {
+    width: 50% !important;
+}
+
+.data-list p {
+    border-bottom: 1px dashed;
+    margin: 0 5px;
+}
+
+.underline-drawer {
+    border-bottom: 1px dashed;
+}
+
+.top {
+    font-size: 12px;
+}
+
+.description{
+    font-size: 15px;
 }

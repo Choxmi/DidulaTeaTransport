@@ -1,0 +1,17 @@
+h1 {
+    font-size: 50px;
+}
+
+h5 {
+    font-size: 30px;
+}
+
+thead tr td {
+    font-weight: bolder;
+}
+
+table {
+    width: 90%;
+    text-align: center;
+    margin: auto;
+}

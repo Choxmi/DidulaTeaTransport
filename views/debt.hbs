@@ -1,0 +1,26 @@
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="css/debt.css">
+    </head>
+    <body style="text-align: center;">
+        <h1>Customers in debt</h1>
+        <table>
+            <thead>
+                <tr>
+                <td>User ID</td>
+                <td>User Name</td>
+                <td>Debt (Rs.)</td>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each debtArr}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{debt}}</td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </body>
+</html>
